@@ -97,6 +97,7 @@ export function subscribe(){
 
 /**
  * unsubscribe Unsubscribes from your topics
+ *     mqttControls.unsubscribe()
  */
 export function unsubscribe(){
   console.log(`Unsubscribing client ${clientId} from topic: ${topics.subscribe}`);
@@ -145,7 +146,7 @@ export function send(message = 'hello mqtt-controls', topic = null){
   }else{
     t = topic;
   }
-  client.publish(t,message);
+  client.publish(t, message);
 }
 
 // export function listen(){
