@@ -12,6 +12,7 @@ exports.subscribe = subscribe;
 exports.unsubscribe = unsubscribe;
 exports.unpublish = unpublish;
 exports.publish = publish;
+exports.send = send;
 
 var _mqtt = require('mqtt');
 
@@ -49,12 +50,12 @@ function mqttControls() {}
 // export var clientId =  clientId;
 
 /**
- * #init  Initialize the library
+ * init  Initialize the library
  * @param  {String} _user     The user name at your broker. Default: try
  * @param  {String} _pw       The password at your broker. Default: try
  * @param  {String} _clientId The name you want to be displayed with: Default: mqttControlsClient
  * @param  {String} _broker   The borker to connect to. Default: brker.shiftr.io
- * @param  {Object} _topics   Topics to subscribe and th publish to. Currently one one per publish and subscribe. Default {'subscribe':'/output/#','publih':'/input/'}
+ * @param  {Object} _topics   Topics to subscribe and th publish to. Currently one one per publish and subscribe. Default `{'subscribe':'/output/#','publih':'/input/'}`
  */
 function init() {
   var _user = arguments.length <= 0 || arguments[0] === undefined ? 'try' : arguments[0];
@@ -79,14 +80,14 @@ function init() {
 };
 
 /**
- * #connect Connect your client to the broker
+ * connect Connect your client to the broker
  */
 function connect() {
   console.log('Connecting client: ' + clientId + ' to url:"' + url + '"');
   client = mqtt.connect(url, { 'clientId': clientId });
 }
 /**
- * #disconnect disconnect from the broker
+ * disconnect disconnect from the broker
  * @param  {Boolean}  force force disconnect. Default: false
  * @param  {Function} cb    Callback function the be called after disconnect. Default: undefined
  */
@@ -100,7 +101,7 @@ function disconnect() {
 }
 
 /**
- * #reconnect Reconnect to your broker
+ * reconnect Reconnect to your broker
  */
 function reconnect() {
   client.end(false, function () {
@@ -110,7 +111,7 @@ function reconnect() {
 }
 
 /**
- * #subscribe Subscribes to your topics
+ * subscribe Subscribes to your topics
  */
 function subscribe() {
   console.log('Subscribing client ' + clientId + ' to topic: ' + topics.subscribe);
@@ -119,7 +120,7 @@ function subscribe() {
 }
 
 /**
- * #unsubscribe Unsubscribes from your topics
+ * unsubscribe Unsubscribes from your topics
  */
 function unsubscribe() {
   console.log('Unsubscribing client ' + clientId + ' from topic: ' + topics.subscribe);
@@ -132,7 +133,7 @@ function unsubscribe() {
 }
 
 /**
- * #unpublish Stop publishing to the broker
+ * unpublish Stop publishing to the broker
  */
 function unpublish() {
   console.log('Client ' + clientId + ' should stop publishing to topic ' + topics.publish);
@@ -140,7 +141,7 @@ function unpublish() {
 }
 
 /**
- * #publish Start publishing in an interval to your broker this is more for testing then for real usage.
+ * publish Start publishing in an interval to your broker this is more for testing then for real usage.
  */
 function publish() {
   console.log('Client ' + clientId + ' is publishing to topic ' + topics.publish);
@@ -154,6 +155,24 @@ function publish() {
       stopPub = false;
     }
   }, 1000);
+}
+
+/**
+ * Send one signal to the borker
+ * @param  {String} message - The message to send. Default: `{'hello mqtt-controls'}`
+ * @param  {String} topic - The topic to send to. Default: is `topics = {'subscribe':'/output/#','publih':'/input/'}`
+ */
+function send() {
+  var message = arguments.length <= 0 || arguments[0] === undefined ? 'hello mqtt-controls' : arguments[0];
+  var topic = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+
+  var t = undefined;
+  if (topic === null) {
+    t = topics.publish;
+  } else {
+    t = topic;
+  }
+  client.publish(t, message);
 }
 
 // export function listen(){
