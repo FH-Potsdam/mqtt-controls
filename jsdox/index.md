@@ -81,7 +81,7 @@ publish Start publishing in an interval to your broker this is more for testing 
 
 ### send(message, topic) 
 
-Send one signal to the borker
+Send one signal to the broker
 
 **Parameters**
 

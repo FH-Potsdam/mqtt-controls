@@ -10,6 +10,7 @@
   "author": "Fabian 'fabiantheblind' Morón Zirfas <fabian.moron.zirfas@gmail.com> (http://fabianmoronzirfas.me)",
   "license": "ISC",
   "dependencies": {
-    "mqtt-controls": "0.0.1"
+    "mqtt-controls": "0.0.3",
+    "open": "0.0.5"
   }
 }
