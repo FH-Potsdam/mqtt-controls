@@ -121,6 +121,7 @@ function subscribe() {
 
 /**
  * unsubscribe Unsubscribes from your topics
+ *     mqttControls.unsubscribe()
  */
 function unsubscribe() {
   console.log('Unsubscribing client ' + clientId + ' from topic: ' + topics.subscribe);
