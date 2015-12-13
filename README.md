@@ -3,7 +3,32 @@
 a wrapper for using the mqtt lib in a upcoming project.
 Might be useful just for me.
 
-# Global
+## Install
+
+npm install mqtt-controls
+
+## Usage  
+
+    var mq = require('mqtt-controls');
+    var open = require('open'); // just to see whats going on
+    
+    mq.init(); // setup with defaults
+    mq.connect(); // connect
+    console.log('opening https://shiftr.io/try so you see whats going on');
+    open('https://shiftr.io/try#terminal'); // see it online
+    var count = 0; 
+    // send ten pings and disconnect
+    var timer = setInterval(function(){
+      mq.send('ping','hello-world');
+      console.log('ping');
+      count++;
+      if(count == 10){
+        clearInterval(timer);
+        mq.disconnect();
+      }
+    }, 1000);
+
+
 
 ### mqttControls() 
 
@@ -13,7 +38,7 @@ mqttControls The main object. Everything else is a child
 
 ### init(_user, _pw, _clientId, _broker, _topics) 
 
-Initialize the library
+init  Initialize the library
 
 **Parameters**
 
@@ -25,19 +50,19 @@ Initialize the library
 
 **_broker**: `String`, The borker to connect to. Default: brker.shiftr.io
 
-**_topics**: `Object`, Topics to subscribe and th publish to. Currently one one per publish and subscribe. Default {'subscribe':'/output/#','publih':'/input/'}
+**_topics**: `Object`, Topics to subscribe and th publish to. Currently one one per publish and subscribe. Default `{'subscribe':'/output/#','publih':'/input/'}`
 
 
 
 ### connect() 
 
-Connect your client to the broker
+connect Connect your client to the broker
 
 
 
 ### disconnect(force, cb) 
 
-disconnect from the broker
+disconnect disconnect from the broker
 
 **Parameters**
 
@@ -49,29 +74,45 @@ disconnect from the broker
 
 ### reconnect() 
 
-Reconnect to your broker
+reconnect Reconnect to your broker
+
 
 
 ### subscribe() 
 
-Subscribes to your topics
+subscribe Subscribes to your topics
+
 
 
 ### unsubscribe() 
 
-Unsubscribes from your topics
+unsubscribe Unsubscribes from your topics
+    mqttControls.unsubscribe()
 
 
 
 ### unpublish() 
 
-Stop publishing to the broker
+unpublish Stop publishing to the broker
 
 
 
 ### publish() 
 
-Start publishing in an interval to your broker this is more for testing then for real usage.
+publish Start publishing in an interval to your broker this is more for testing then for real usage.
+
+
+
+### send(message, topic) 
+
+Send one signal to the broker
+
+**Parameters**
+
+**message**: `String`, The message to send. Default: `{'hello mqtt-controls'}`
+
+**topic**: `String`, The topic to send to. Default: is `topics = {'subscribe':'/output/#','publih':'/input/'}`
+
 
 
 ## License ISC
