@@ -7,7 +7,9 @@
     "node": ">=0.12.7"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --compilers js:babel-core/register",
+    "jsdox": "./node_modules/.bin/jsdox --output jsdox dist/index.js",
+    "jsdoc": "./node_modules/.bin/jsdoc dist/index.js --readme README.md --package package.json -d ./docs"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,8 @@
     "eslint": "^1.10.3",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
+    "jsdoc": "^3.4.0",
+    "jsdox": "^0.4.9",
     "mocha": "^2.3.4"
   },
   "dependencies": {
