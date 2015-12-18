@@ -5,7 +5,7 @@ Might be useful just for me.
 
 ## Install
 
-npm install mqtt-controls
+    npm install mqtt-controls
 
 ## Usage  
 
