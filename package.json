@@ -1,6 +1,6 @@
 {
   "name": "mqtt-controls",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "a wrapper around the mqtt lib for easier usage",
   "main": "dist/index.js",
   "engines": {
