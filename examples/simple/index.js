@@ -1,6 +1,5 @@
 var mq = require('mqtt-controls');
 var open = require('open');
-
 mq.init();
 mq.connect();
 console.log('opening https://shiftr.io/try so you see whats going on');
